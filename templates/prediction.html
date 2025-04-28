@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Leukemia Prediction Analysis{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/prediction.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="prediction-container">
+    <h1 class="page-title">Leukemia Prediction Analysis</h1>
+
+    <div class="prediction-content">
+        <div class="input-section">
+            <div class="section-header">
+                <span class="icon">📋</span>
+                <h2>Patient Information & Data Input</h2>
+            </div>
+            
+            <form method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patient_name">Patient Name</label>
+                        <input type="text" id="patient_name" name="patient_name" placeholder="Enter patient name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" placeholder="Enter age" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="" selected disabled>Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="test_date">Date of Test</label>
+                        <input type="date" id="test_date" name="test_date" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact">Contact (Optional)</label>
+                    <input type="text" id="contact" name="contact" placeholder="Phone number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email (Optional)</label>
+                    <input type="email" id="email" name="email" placeholder="Email address">
+                </div>
+                
+                <div class="upload-section">
+                    <div class="upload-content">
+                        <div class="upload-icon">
+                            <img src="{{ url_for('static', filename='images/chart-icon.png') }}" alt="Upload Chart" 
+                                 onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%234A90E2%22%20d%3D%22M14%202H6C4.9%202%204%202.9%204%204V20C4%2021.1%204.9%2022%206%2022H18C19.1%2022%2020%2021.1%2020%2020V8L14%202Z%22%2F%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M14%202V8H20%22%2F%3E%3C%2Fsvg%3E'">
+                        </div>
+                        <p>Upload patient blood test data</p>
+                        <small>Supported format: .csv, .xls, .xlsx (Max size 162KB)</small>
+                        <div class="upload-button">
+                            <input type="file" id="blood_test_file" name="blood_test_file" accept=".csv,.xls,.xlsx" required>
+                            <p id="file-name" class="file-name"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="run-prediction-btn">Run Prediction Analysis</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="results-section">
+            <div class="section-header">
+                <span class="icon">📊</span>
+                <h2>Prediction Results</h2>
+            </div>
+            
+            <div class="model-tabs">
+                <div class="tab-header">
+                    <h3>Model Predictions</h3>
+                    <div class="tabs">
+                        <button class="tab-btn active">Model 1</button>
+                        <!-- <button class="tab-btn">Model 2</button> -->
+                    </div>
+                </div>
+                
+                <div class="prediction-results">
+                    {% if prediction %}
+                        <div class="result-item">
+                            <div class="result-label">Leukemia Type:</div>
+                            <div class="result-value highlight">{{ prediction.leukemia_type }}</div>
+                        </div>
+                        
+                        <!-- <div class="result-item">
+                            <div class="result-label">Subtype:</div>
+                            <div class="result-value">{{ prediction.subtype }}</div>
+                        </div> -->
+                        
+                        <div class="result-item">
+                            <div class="result-label">Confidence Score:</div>
+                            <div class="result-value">{{ prediction.confidence }}</div>
+                        </div>
+                        
+                        <!-- <div class="result-item">
+                            <div class="result-label">Risk Level:</div>
+                            <div class="result-value risk-{{ prediction.risk_level|lower }}">{{ prediction.risk_level }}</div>
+                        </div> -->
+                    {% else %}
+                        <div class="no-results">
+                            <p>No prediction results available. Upload patient data and run the analysis.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="doctors-remarks">
+                <h3>Doctor's Remarks</h3>
+                <form action="{{ url_for('prediction') }}" method="post">
+                    <input type="hidden" name="patient_id" value="{{ patient_id }}">
+                    <textarea name="remark_text" placeholder="Enter clinical observations and treatment recommendations..."></textarea>
+                    <button type="submit" class="save-remarks-btn">Save Remarks</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

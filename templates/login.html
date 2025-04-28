@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}Login - MediCare{% endblock %}
+
+{% block content %}
+<section class="content-section">
+  <div class="container">
+    <h2 class="page-title">Login to Your Account</h2>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
+    <div class="form-container">
+      <form method="post" action="{{ url_for('login') }}">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        
+        <div class="form-group">
+          <button type="submit" class="btn">Login</button>
+        </div>
+        
+        <p style="text-align: center; margin-top: 20px; font-size: 14px;">
+          Don't have an account? <a href="{{ url_for('register') }}" style="color: #c03838;">Register now</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

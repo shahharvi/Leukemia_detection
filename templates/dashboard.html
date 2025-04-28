@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Doctor's Dashboard - MediCare{% endblock %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Search and Filter Section -->
+    <div class="search-section">
+        <h2>Patient Management</h2>
+        <div class="search-controls">
+            <div class="search-box">
+                <input type="text" id="patientSearch" placeholder="Search by patient name or ID">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="filter-options">
+                <select id="diagnosisFilter">
+                    <option value="">All Diagnoses</option>
+                    <option value="ALL">Acute Lymphoblastic Leukemia (ALL)</option>
+                    <option value="AML">Acute Myeloid Leukemia (AML)</option>
+                    <option value="APL">Acute Promyelocytic Leukemia (APL)</option>
+                </select>
+                <button id="applyFilters" class="btn-primary">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patient List Section -->
+    <div class="patient-list-section">
+        <h2>History</h2>
+        <table class="patient-table">
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Diagnosis</th>
+                    <th>Last Test</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="patientTableBody">
+                {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.patient_id }}</td>
+                    <td>{{ patient.patient_name }}</td>
+                    <td>{{ patient.age }}</td>
+                    <td>{{ patient.leukemia_type or 'Pending' }}</td>
+                    <td>{{ patient.test_date }}</td>
+                    <td> 
+                        <button class="btn-action view-btn" data-id="{{ patient.patient_id }}"><i class="fas fa-eye"></i></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            <button id="prevPage" class="page-btn">Previous</button>
+            <div class="page-numbers" id="pageNumbers">
+                <!-- Page numbers will be populated by JavaScript -->
+            </div>
+            <button id="nextPage" class="page-btn">Next</button>
+        </div>
+    </div>
+
+    <!-- Patient Detail Modal -->
+    <div id="patientDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Patient Details</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="patient-info-section">
+                    <div class="patient-header">
+                        <h4 id="patientName"></h4>
+                        <span id="patientId" class="patient-id"></span>
+                    </div>
+                    
+                    <div class="patient-details-grid">
+                        <div class="detail-item">
+                            <label>Age:</label>
+                            <span id="patientAge"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Gender:</label>
+                            <span id="patientGender"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Contact:</label>
+                            <span id="patientContact"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Email:</label>
+                            <span id="patientEmail"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Date of Test:</label>
+                            <span id="testDate"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Leukemia Type:</label>
+                            <span id="leukemiaType"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Confidence Score:</label>
+                            <span id="confidenceScore"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="remarks-section">
+                    <h4>Doctor's Remarks</h4>
+                    <div class="remarks-container" id="patientRemarks">
+                        <!-- Remarks will be loaded here -->
+                    </div>
+                    <div class="add-remark-form">
+                        <textarea id="newRemarkText" class="remark-textarea" placeholder="Add new remark..."></textarea>
+                        <button id="submitRemark" class="btn-primary">Add Remark</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patient History Modal -->
+    <div id="patientHistoryModal" class="modal">
+        <div class="modal-content history-modal">
+            <div class="modal-header">
+                <h3>Patient History</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="history-header">
+                    <h4 id="historyPatientName"></h4>
+                    <span id="historyPatientId" class="patient-id"></span>
+                </div>
+                
+                <div class="history-controls">
+                    <div class="date-range">
+                        <label>Date Range:</label>
+                        <input type="date" id="startDate">
+                        <span>to</span>
+                        <input type="date" id="endDate">
+                        <button id="applyDateRange" class="btn-primary">Apply</button>
+                    </div>
+                    <div class="history-search">
+                        <input type="text" id="historySearch" placeholder="Search history...">
+                    </div>
+                </div>
+                
+                <div class="history-table-container">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Test Type</th>
+                                <th>Prediction</th>
+                                <th>Confidence</th>
+                                <!-- <th>Actions</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <!-- History records will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

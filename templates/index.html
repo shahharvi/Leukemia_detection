@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <h1>Leukemia Care Management Solution</h1>
+    <p>Our system helps doctors to analyze reports, predict leukemia types and real-time analysis to track and visualize cases over time</p>
+    <a href="{{ url_for('prediction') }}" class="btn">Get Started</a>
+  </div>
+</section>
+
+<section class="container">
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 11.08V8l-6-6H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2v-3.08"></path>
+          <path d="M14 3v5h5"></path>
+          <rect x="12" y="12" width="4" height="4" rx="1"></rect>
+          <path d="M9 12h.01"></path>
+          <path d="M9 16h.01"></path>
+        </svg>
+      </div>
+      <h3>Leukemia Prediction</h3>
+      <p>Utilize AI-driven diagnostics to assess leukemia using machine learning algorithms for prediction.
+
+      </p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path>
+          <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"></path>
+          <rect x="16" y="8" width="4" height="4" rx="1"></rect>
+          <path d="M2 14h.01"></path>
+        </svg>
+      </div>
+      <h3>Doctor's Dashboard</h3>
+      <p>Provides a comprehensive overview of leukemia cases. Detect emerging patterns and fluctuations in leukemia cases through interactive visualizations.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+        </svg>
+      </div>
+      <h3>Predictive Ananlysis </h3>
+      <p>Provides a comprehensive overview of leukemia cases. Detect emerging patterns and fluctuations in leukemia cases through interactive visualizations.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

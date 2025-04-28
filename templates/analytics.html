@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}Analytics - Medicare{% endblock %}
+
+{% block content %}
+<div class="analytics-container">
+    <h1 class="page-title">Leukemia Analytics Dashboard</h1>
+    
+    <div class="metrics-container">
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="metric-content">
+                <h3>Total Cases</h3>
+                <p class="metric-value" id="total-cases">{{ metrics.total_cases }}</p>
+            </div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-dna"></i>
+            </div>
+            <div class="metric-content">
+                <h3>ALL Cases</h3>
+                <p class="metric-value" id="all-cases">{{ metrics.all_cases }}</p>
+            </div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-dna"></i>
+            </div>
+            <div class="metric-content">
+                <h3>AML Cases</h3>
+                <p class="metric-value" id="aml-cases">{{ metrics.aml_cases }}</p>
+            </div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-dna"></i>
+            </div>
+            <div class="metric-content">
+                <h3>APL Cases</h3>
+                <p class="metric-value" id="apl-cases">{{ metrics.apl_cases }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="charts-container">
+        <div class="chart-card">
+            <h3>Monthly Leukemia Case Distribution</h3>
+            <div class="chart-wrapper">
+                <canvas id="monthly-chart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-card">
+            <h3>Yearly Trend Analysis</h3>
+            <div class="chart-wrapper">
+                <canvas id="yearly-chart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-card">
+            <h3>Weekly Incidence Reporting</h3>
+            <div class="chart-wrapper">
+                <canvas id="weekly-chart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-card">
+            <h3>Leukemia Type Distribution</h3>
+            <div class="chart-wrapper">
+                <canvas id="type-distribution-chart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="filter-container">
+        <div class="filter-group">
+            <label for="date-range">Date Range:</label>
+            <select id="date-range" class="filter-select">
+                <option value="last30">Last 30 Days</option>
+                <option value="last90">Last 90 Days</option>
+                <option value="last180">Last 180 Days</option>
+                <option value="last365">Last Year</option>
+                <option value="all">All Time</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label for="type-filter">Leukemia Type:</label>
+            <select id="type-filter" class="filter-select">
+                <option value="all">All Types</option>
+                <option value="ALL">ALL</option>
+                <option value="AML">AML</option>
+                <option value="APL">APL</option>
+            </select>
+        </div>
+        
+        <button id="apply-filters" class="filter-button">Apply Filters</button>
+    </div>
+</div>
+
+<!-- Load FontAwesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- Load Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+<!-- Custom JS -->
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+
+{% endblock %}
