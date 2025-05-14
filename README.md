@@ -27,14 +27,14 @@ This project aims to develop an intelligent system for **early detection of leuk
 | Backend      | **Flask** (REST API) |
 | ML Model     | **LightGBM**, XGBoost |
 | Data Handling| **Pandas**, NumPy    |
-| Database     | **PostgreSQL**       |
+| Database     | **mySQL**       |
 | Deployment   | Localhost / Cloud-ready |
 
 ---
 
 ## 📊 Machine Learning Model
 
-- **Input:** Routine blood parameters (e.g., WBC count, Hemoglobin, Platelet, etc.)
+- **Input:** Routine blood parameters i.e CBC (Complete Blood Count)
 - **Output:** Leukemia Type → `ALL`, `AML`, `APL`
 - **Model Used:** LightGBM Classifier
 - **Accuracy Achieved:** ~92%
@@ -49,12 +49,14 @@ leukemia_detection/
 ├── model/
 │ └── leukemia_model.pkl # Trained ML model
 ├── uploads/ # Uploaded Excel files
-├── templates/ # HTML templates (optional)
+├── templates/
+| └── leukemia_model.pkl
 ├── database.py # PostgreSQL connection
 ├── utils.py # Helper functions
 ├── requirements.txt # Required Python packages
 └── README.md # Documentation
 
+---
 
 ## 🧠 Model Details
 
@@ -64,6 +66,7 @@ leukemia_detection/
 - **Accuracy:** ~92%
 - **Evaluation Metrics:** Accuracy, Precision, Recall, Confusion Matrix
 
+---
 
 ## ⚙️ How It Works
 
@@ -73,6 +76,7 @@ leukemia_detection/
 4. Result is stored in PostgreSQL with patient and doctor details.
 5. Doctor can search, filter, and view reports on a dashboard.
 
+---
 
 ## ⚠️ Disclaimer
 
