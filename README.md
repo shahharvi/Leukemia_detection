@@ -1,84 +1,66 @@
-# Leukemia_detection
+# 🩸 Leukemia Cancer Detection System
 
-# 🔬 Leukemia Cancer Detection Using Routine Laboratory Parameters
-
-## 📌 Project Overview
-
-This project aims to develop an intelligent system for **early detection of leukemia types (ALL, AML, APL)** using **routine blood test results** and **machine learning techniques**. The objective is to assist healthcare professionals in timely diagnosis using cost-effective and accessible clinical parameters.
+A lightweight diagnostic tool that predicts leukemia subtypes (**ALL**, **AML**, **APL**) using routine CBC test results and Machine Learning — empowering faster, affordable, and accessible diagnosis support.
 
 ---
 
-## 🚀 Features
+## 📌 Project Highlights
 
-- Predict leukemia type (ALL, AML, APL) using trained ML model
-- Upload Excel sheets containing patient lab test data
-- Store results in PostgreSQL database with doctor-patient mapping
-- Doctor dashboard to search, view, and manage patient records
-- Visual analytics for leukemia trends and type distribution
-- Confidence score for each prediction
-
----
-
-## 🛠️ Tech Stack
-
-| Layer        | Technology           |
-|--------------|----------------------|
-| Frontend     | Python GUI / HTML (optional) |
-| Backend      | **Flask** (REST API) |
-| ML Model     | **LightGBM**, XGBoost |
-| Data Handling| **Pandas**, NumPy    |
-| Database     | **mySQL**       |
-| Deployment   | Localhost / Cloud-ready |
-
----
-
-## 📊 Machine Learning Model
-
-- **Input:** Routine blood parameters i.e CBC (Complete Blood Count)
-- **Output:** Leukemia Type → `ALL`, `AML`, `APL`
-- **Model Used:** LightGBM Classifier
-- **Accuracy Achieved:** ~92%
-- **Evaluation Metrics:** Accuracy, Precision, Recall, Confusion Matrix
-
----
-
-## 📁 Project Structure
-
-leukemia_detection/
-├── app.py # Main Flask app
-├── model/
-│ └── leukemia_model.pkl # Trained ML model
-├── uploads/ # Uploaded Excel files
-├── templates/
-| └── leukemia_model.pkl
-├── database.py # PostgreSQL connection
-├── utils.py # Helper functions
-├── requirements.txt # Required Python packages
-└── README.md # Documentation
-
----
-
-## 🧠 Model Details
-
-- **Model Type:** LightGBM Classifier
-- **Input:** Routine blood parameters (WBC, RBC, Hemoglobin, etc.)
-- **Output:** Predicted Leukemia Type (ALL, AML, APL)
-- **Accuracy:** ~92%
-- **Evaluation Metrics:** Accuracy, Precision, Recall, Confusion Matrix
+- 🔍 Predict leukemia subtypes: **ALL**, **AML**, **APL**
+- 📄 Upload patient test data in Excel format
+- 🧠 Built with ML models: **LightGBM**, **XGBoost**
+- 📈 Visual analytics of prediction trends
+- 👨‍⚕️ Doctor dashboard with search, view & report features
+- 💾 Stores results in a MySQL database
+- ✅ Shows confidence score for every prediction
 
 ---
 
 ## ⚙️ How It Works
 
-1. Doctor uploads an Excel sheet with patient lab results.
-2. Backend extracts features using Pandas.
-3. ML model predicts leukemia type with confidence.
-4. Result is stored in PostgreSQL with patient and doctor details.
-5. Doctor can search, filter, and view reports on a dashboard.
+1. Doctor uploads patient CBC test data (Excel).
+2. Data is cleaned and fed into the ML model.
+3. Model predicts leukemia subtype with a confidence score.
+4. Results are stored and available for viewing through the dashboard.
 
+---
+
+## 🛠️ Tech Stack
+
+| Layer         | Technology                       |
+|---------------|----------------------------------|
+| **Frontend**  | Python GUI / HTML (optional)     |
+| **Backend**   | Flask (REST API)                 |
+| **ML Models** | LightGBM, XGBoost                |
+| **Database**  | MySQL                            |
+| **Libraries** | Pandas, NumPy, Scikit-learn      |
+| **Deployment**| Localhost (Cloud-ready setup)    |
+
+---
+
+## 🧠 Model Overview
+
+- **Input:** CBC parameters (WBC, RBC, Hemoglobin, Platelet, etc.)
+- **Output:** Predicted Leukemia Type: `ALL`, `AML`, or `APL`
+- **Training Accuracy:** ~92%
+- **ML Models Used:** LightGBM & XGBoost
+- **Evaluation Metrics:** Accuracy, Precision, Recall, F1-Score
+  
 ---
 
 ## ⚠️ Disclaimer
 
-This project is developed for academic purposes and should not be used for real medical diagnosis without professional verification.
+This project is intended for academic and research purposes only. It is **not** approved for clinical use. Always consult qualified medical professionals before making any health-related decisions.
 
+---
+
+## 👨‍💻 Author
+
+**Harvi Shah**  
+📧 shahharvi05@gmail.com  
+🔗 [LinkedIn](https://www.linkedin.com/in/harvi-shah-0918762b4/)  
+🎓 B.Tech Computer Engineering | CHARUSAT
+
+---
+
+🧠 *"Code with care. Build with purpose."*
