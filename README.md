@@ -29,9 +29,9 @@ A lightweight diagnostic tool that predicts leukemia subtypes (**ALL**, **AML**,
 
 | Layer         | Technology                       |
 |---------------|----------------------------------|
-| **Frontend**  | HTML, CSS, JavaScript     |
+| **Frontend**  | HTML, CSS, JavaScript            |
 | **Backend**   | Flask (REST API)                 |
-| **ML Models** | LightGBM, XGBoost                |
+| **ML Models** | LightGBM, XGBoost, Random Forest |
 | **Database**  | MySQL                            |
 | **Libraries** | Pandas, NumPy, Scikit-learn      |
 | **Deployment**| Localhost (Cloud-ready setup)    |
